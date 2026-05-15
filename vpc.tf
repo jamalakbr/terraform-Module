@@ -11,13 +11,13 @@ provider "aws" {
   region = "us-east-1"
 }
 
-
+#*** VPC Module ***
 #*** VPC ***
 resource "aws_vpc" "terra-vpc" {
   cidr_block = "10.0.0.0/16"
 
 }
-
+#**************** Subnet Variable by using map(string) with key: Value*****************
 variable "subnets_my_vpc" {
   description = "Subnet for my_vpc"
   type = map(string)
@@ -27,6 +27,7 @@ variable "subnets_my_vpc" {
     "us-east-1c" = "10.0.3.0/24"
     } 
 }
+#**************** Subnet & AZ Calling by using map(string) with key: Value*****************
 
 resource "aws_subnet" "Private_Subnet" {
   vpc_id     = aws_vpc.terra-vpc.id
